@@ -4,7 +4,7 @@ const port = 4000
 const path = require('path');
 const bodyParser = require('body-parser'); //to use post request
 const cors = require('cors');
-const mongoose = require ('mongoose'); // add for mongoDB (lab8)        (10)
+const mongoose = require ('mongoose'); // add for mongoDB (lab8) allows to connect to database       (10)
 
 //add the following bellow for (lab8) (10)
 const mongoDB = 'mongodb+srv://admin:admin@cluster0-t58dy.mongodb.net/test?retryWrites=true&w=majority';
@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended:false }))
 //parse application/json
 app.use(bodyParser.json())
 //---------------------------------------------------------------------------------------------------
-//(10) creating a FOLDER for your DATABASE to store into
+//(10) creating a FOLDER for your DATABASE to store into mongoDB!!
     //AKA WRITING DATA
 
 const Schema = mongoose.Schema;
@@ -68,6 +68,23 @@ app.get('/hello/:name', (req, res) => {
 app.get('/test', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'))
 })
+//---------------------------------------------------------------------------------------------------
+/////SERVER SIDE DELETE///////
+//---------------------------------------------------------------------------------------------------
+
+app.delete('/api/movies/:id',(req,res)=>{
+    console.log(req.params.id); //log id to screen
+
+    MovieModel.deleteOne({_id:req.params.id},(error,data) =>{ //u pick here which one you want to delete! aka "_id"
+        if(error)
+        res.json(error);
+           res.json(data);
+
+     })
+})//listen for an id
+
+
+
 //---------------------------------------------------------------------------------------------------
 //(10)
 // http://localhost:4000/api/movies/5db96045f733220998a9b621  <-- the long code got from the mongoDB site which is from  the created movie from client in collections
