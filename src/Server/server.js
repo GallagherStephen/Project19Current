@@ -88,6 +88,8 @@ app.delete('/api/movies/:id',(req,res)=>{
 //---------------------------------------------------------------------------------------------------
 //(10)
 // http://localhost:4000/api/movies/5db96045f733220998a9b621  <-- the long code got from the mongoDB site which is from  the created movie from client in collections
+
+//when passes up an ID . it pulls out id and finds record with same ID.once found returns on json(data)
 app.get('/api/movies/:id', (req,res) => {
 
 console.log(req.params.id);
@@ -98,12 +100,26 @@ MovieModel.findById(req.params.id,(error,data)=>{
     })
 })
 
+//----------------------------------------------------------------------------------------------------
+//needed for edit(server side)
 
+app.put('/api/movies/:id', (req,res)=>{
+
+    console.log("edit: " + req.params.id);
+
+    //call back function
+    MovieModel.findByIdAndUpdate(req.params.id,
+         req.body,
+        { new: true},
+        (error,data)=>{
+            res.json(data);
+        })
+})
 
 
 //---------------------------------------------------------------------------------------------------
 //(10)
-//READING FROM MONGODB
+///////READING FROM MONGODB///////
 
 app.get('/api/movies', (req, res) => {
 

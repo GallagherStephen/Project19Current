@@ -24,7 +24,7 @@ DeleteMovie(e){
 
 
 }
-//--------------------------------------------------------------------------
+//-----------------//IF I TAKE OUT STYLE IN LINE 38 IT STRETCHES THE READ ME PAGE ITEMS TO SIZE OF PAGE---------------------------------------------------------
 
     render(){
         return(
@@ -34,7 +34,10 @@ DeleteMovie(e){
                 <img src={this.props.movie.Poster}></img> */}
 
 
-                <Card  border="primary" style={{ width: '28rem' }}>
+
+                <Card  border="primary" style={{ width: '28rem' }}> 
+                
+
 
   <Card.Header>{this.props.movie.title}</Card.Header>
   <Card.Body>
