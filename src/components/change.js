@@ -3,57 +3,57 @@ import '../App.css';
 import axios from 'axios'; //to talk to the server 
 import { thisExpression } from '@babel/types';
 
-class Edit extends React.Component {
+class Change extends React.Component {
 
   constructor(props){
     super(props);
 
-    this.state = {Title: '',
-                  Year: '',
-                  Poster: '',
+    this.state = {Name: '',
+                  Released: '',
+                  Picture: '',
                   _id:''};
 
 
-    this.handleChangeMovieTitle = this.handleChangeMovieTitle.bind(this);
-    this.handleChangeMovieYear = this.handleChangeMovieYear.bind(this);
-    this.handleChangeMoviePoster = this.handleChangeMoviePoster.bind(this);
+    this.handleChangeCarName = this.handleChangeCarName.bind(this);
+    this.handleChangeCarReleased = this.handleChangeCarReleased.bind(this);
+    this.handleChangeCarPicture = this.handleChangeCarPicture.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //-------------------------------------------------
   //HANDLE CHANGE EVENTS:
   //-------------------------------------------------
-  handleChangeMovieTitle(e) {
-    this.setState({Title: e.target.value});
+  handleChangeCarName(e) {
+    this.setState({Name: e.target.value});
   }
 
-  handleChangeMovieYear(e) {
-    this.setState({Year: e.target.value});
+  handleChangeCarReleased(e) {
+    this.setState({Released: e.target.value});
   }
 
-  handleChangeMoviePoster(e) {
-    this.setState({Poster: e.target.value});
+  handleChangeCarPicture(e) {
+    this.setState({Picture: e.target.value});
   }
   //-------------------------------------------------
 
   handleSubmit(e) {
-    alert( 'Movie:  ' + this.state.Title + "  "  + this.state.Year + "  " + this.state.Poster);
+    alert( 'Car:  ' + this.state.Name + "  "  + this.state.Released + "  " + this.state.Picture);
     e.preventDefault();
 
-    const newMovie = {
-      title:this.state.Title,
-      year:this.state.Year,
-      poster:this.state.Poster
+    const newCar = {
+      name:this.state.Name,
+      released:this.state.Released,
+      picture:this.state.Picture
     }
 
-    axios.put('http://localhost:4000/api/movies/' + this.state._id, newMovie) //takes the url of movie we are editing and the body 
+    axios.put('http://localhost:4000/api/cars/' + this.state._id, newCar) //takes the url of car we are editing and the body 
     .then()
     .catch()
 
     //the following to make the inputs of edit blank after submit button Clicked
-    this.setState({Title:'',
-                    Year:'',
-                  Poster:'',
+    this.setState({Name:'',
+                   Released:'',
+                   Picture:'',
                   });
     
   }
@@ -64,13 +64,13 @@ class Edit extends React.Component {
   //read the data when u click on component
   componentDidMount(){
  alert(this.props.match.params.id) //passes id as part of the url for edit
-    axios.get('http://localhost:4000/api/movies/'+ this.props.match.params.id) //comes back with json in url and update state
+    axios.get('http://localhost:4000/api/cars/'+ this.props.match.params.id) //comes back with json in url and update state
     .then((Response)=>{
       this.setState({
           _id:Response.data._id,
-          Title:Response.data.title,
-          Year:Response.data.year,
-          Poster:Response.data.poster
+          Name:Response.data.name,
+          Released:Response.data.released,
+          Picture:Response.data.picture
       });
     })
     .catch();
@@ -82,42 +82,42 @@ class Edit extends React.Component {
   render() { //visual piece
     return (
       <div>
-      <h1>Hello from Edit component</h1>
+      <h1>Hello from Change component</h1>
       <form onSubmit={this.handleSubmit}>
 
       <div className='form-group'>
       <label>
-        Movie title:
+        Car Name:
         </label>
 
         <input type="text" 
         className= 'form-control'
-        value={this.state.Title}
-         onChange={this.handleChangeMovieTitle} />
+        value={this.state.Name}
+         onChange={this.handleChangeCarName} />
     </div>
 
       
 
       <div className='form-group'>
       <label>
-        Movie Year:
+        Car Released:
         </label>
 
         <input type="text" 
         className= 'form-control'
-        value={this.state.Year}
-         onChange={this.handleChangeMovieYear} />
+        value={this.state.Released}
+         onChange={this.handleChangeCarReleased} />
 
 
       <div className = 'form-group'>
         <label>
-          Movie Poster URL:
+          Car Picture URL:
           </label>
           <textarea
           rows='3'
           className='form-control'
-          value={this.state.Poster}
-          onChange={this.handleChangeMoviePoster}></textarea>
+          value={this.state.Picture}
+          onChange={this.handleChangeCarPicture}></textarea>
       </div>
         </div>
         <input type="submit" value="Submit" />
@@ -130,4 +130,4 @@ class Edit extends React.Component {
   }
 }
 
-export default Edit;
+export default Change;

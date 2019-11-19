@@ -1,3 +1,8 @@
+body{
+  margin:0;
+  padding:0;
+}
+
 .App {
   text-align: center;
 }
@@ -20,3 +25,57 @@
 .App-link {
   color: #09d3ac;
 }
+
+/*---------------------------------------------------------------------------- */
+/* General button style (reset) */
+/*---------------------------------------------------------------------------- */
+.btn {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+  color: inherit;
+	background: none;
+	cursor: pointer;
+	padding: 25px 80px;
+	display: inline-block;
+	margin: 15px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+/*---------------------------------------------------------------------------- */
+/*-----------------------DELETE BUTTON CSS--- btn1---------------------------- */
+/*---------------------------------------------------------------------------- */
+.btn1{
+	overflow: hidden;
+}
+
+.btn1:before {
+	color: #fff;
+	z-index: 1;
+}
+
+.btn1:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 0;
+	width: 100%;
+	z-index: 0;
+	background: #21bb63;
+	-webkit-transition: none;
+	-moz-transition: none;
+	transition: none;
+}
+
+.btn1.btn-activated:after {
+	-webkit-animation: emptyBottom 0.7s forwards;
+	-moz-animation: emptyBottom 0.7s forwards;
+	animation: emptyBottom 0.7s forwards;
+}
+/*---------------------------------------------------------------------------- */

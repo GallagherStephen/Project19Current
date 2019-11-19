@@ -7,7 +7,7 @@ const cors = require('cors');
 const mongoose = require ('mongoose'); // add for mongoDB (lab8) allows to connect to database       (10)
 
 //add the following bellow for (lab8) (10)
-const mongoDB = 'mongodb+srv://admin:admin@cluster0-t58dy.mongodb.net/test?retryWrites=true&w=majority';
+const mongoDB = 'mongodb+srv://admin:admin@cluster0-t58dy.mongodb.net/carsDB?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, {useNewUrlParser:true}); //connect to the database using this parser
 
 //----------------------------------------------------------------------------------------------
@@ -40,13 +40,13 @@ app.use(bodyParser.json())
 
 const Schema = mongoose.Schema;
 
-const movieSchema = new Schema({
-    title:String,
-    year:String,
-    poster:String
+const carSchema = new Schema({
+    name:String,
+    released:String,
+    picture:String
 })
 
-const MovieModel = mongoose.model('movie',movieSchema) //creates a folder called movie that links movieschema/documents to it
+const CarModel = mongoose.model('car',carSchema) //creates a folder called car that links carschema/documents to it
 
 
 
@@ -72,10 +72,10 @@ app.get('/test', (req, res) => {
 /////SERVER SIDE DELETE///////
 //---------------------------------------------------------------------------------------------------
 
-app.delete('/api/movies/:id',(req,res)=>{
+app.delete('/api/cars/:id',(req,res)=>{
     console.log(req.params.id); //log id to screen
 
-    MovieModel.deleteOne({_id:req.params.id},(error,data) =>{ //u pick here which one you want to delete! aka "_id"
+    CarModel.deleteOne({_id:req.params.id},(error,data) =>{ //u pick here which one you want to delete! aka "_id"
         if(error)
         res.json(error);
            res.json(data);
@@ -87,14 +87,14 @@ app.delete('/api/movies/:id',(req,res)=>{
 
 //---------------------------------------------------------------------------------------------------
 //(10)
-// http://localhost:4000/api/movies/5db96045f733220998a9b621  <-- the long code got from the mongoDB site which is from  the created movie from client in collections
+// http://localhost:4000/api/cars/5db96045f733220998a9b621  <-- the long code got from the mongoDB site which is from  the created car from client in collections
 
 //when passes up an ID . it pulls out id and finds record with same ID.once found returns on json(data)
-app.get('/api/movies/:id', (req,res) => {
+app.get('/api/cars/:id', (req,res) => {
 
 console.log(req.params.id);
 
-MovieModel.findById(req.params.id,(error,data)=>{
+CarModel.findById(req.params.id,(error,data)=>{
     res.json(data);
 
     })
@@ -103,12 +103,12 @@ MovieModel.findById(req.params.id,(error,data)=>{
 //----------------------------------------------------------------------------------------------------
 //needed for edit(server side)
 
-app.put('/api/movies/:id', (req,res)=>{
+app.put('/api/cars/:id', (req,res)=>{
 
     console.log("edit: " + req.params.id);
 
     //call back function
-    MovieModel.findByIdAndUpdate(req.params.id,
+    CarModel.findByIdAndUpdate(req.params.id,
          req.body,
         { new: true},
         (error,data)=>{
@@ -121,18 +121,18 @@ app.put('/api/movies/:id', (req,res)=>{
 //(10)
 ///////READING FROM MONGODB///////
 
-app.get('/api/movies', (req, res) => {
+app.get('/api/cars', (req, res) => {
 
-    MovieModel.find((error,data)=>{
+    CarModel.find((error,data)=>{
 
-        res.json({movies:data}) //now calling the data to have an array called movies in json 
+        res.json({cars:data}) //now calling the data to have an array called cars in json 
     })
 
 
 
 })
-   /*//(5)SENDS BACK A RESPONSE OF MOVIE JSON DATA 
-        const myMovies = 
+   /*//(5)SENDS BACK A RESPONSE OF CAR JSON DATA 
+        const myCars = 
         [
         {
         "Title":"Avengers: Infinity War",
@@ -146,27 +146,27 @@ app.get('/api/movies', (req, res) => {
         }
         ]
 
-        res.status(200).json({movies:myMovies,message:'operation completed sucessfully!'})
+        res.status(200).json({cars:myCars,message:'operation completed sucessfully!'})
           */  
         
 //---------------------------------------------------------------------------------------------------
-//(9) sending data up from the create.js page to the server.
+//(9) sending data up from the add.js page to the server.
 //(10) need this for code below to create up to mongoDB
 //AKA WRITING DATA
 
-app.post('/api/movies',(req,res) => {
-    console.log('Movie Recieved');
+app.post('/api/cars',(req,res) => {
+    console.log('Car Recieved');
     console.log(req.body);
-    console.log(req.body.title);
-    console.log(req.body.year);
-    console.log(req.body.poster);
+    console.log(req.body.name);
+    console.log(req.body.released);
+    console.log(req.body.picture);
 
 
 //(10) allows the data to be created which gets passed up to mongoDB
-MovieModel.create({
-    title: req.body.title,
-    year: req.body.year,
-    poster: req.body.poster,
+CarModel.create({
+    name: req.body.name,
+    released: req.body.released,
+    picture: req.body.picture,
 });
 })
 //---------------------------------------------------------------------------------------------------
