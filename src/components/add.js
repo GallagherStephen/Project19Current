@@ -42,7 +42,7 @@ class Add extends React.Component {
       picture:this.state.Picture
     }
     axios.post('http://localhost:4000/api/cars',newCar)
-    .then()
+    .then(window.location.reload())
     .catch();
   }
 

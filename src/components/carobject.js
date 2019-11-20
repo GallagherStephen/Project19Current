@@ -18,7 +18,7 @@ DeleteCar(e){
  console.log("delete button clicked");
 
  axios.delete('http://localhost:4000/api/cars/'+this.props.car._id) //returns a promise that its deleted
-.then()
+.then(window.location.reload())
 .catch();
 
 

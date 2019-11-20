@@ -11,12 +11,14 @@ class Change extends React.Component {
     this.state = {Name: '',
                   Released: '',
                   Picture: '',
-                  _id:''};
+                  _id:'',
+                  Base64Image: ''}; //for embedded image
 
 
     this.handleChangeCarName = this.handleChangeCarName.bind(this);
     this.handleChangeCarReleased = this.handleChangeCarReleased.bind(this);
     this.handleChangeCarPicture = this.handleChangeCarPicture.bind(this);
+    this.handleEmbeddedImage = this.handleEmbeddedImage.bind(this); //for embedded image
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -31,6 +33,30 @@ class Change extends React.Component {
     this.setState({Released: e.target.value});
   }
 
+
+  getBase64(file,cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(reader.result)
+    }
+    reader.onerror = function (error){
+    console.log('Error:',error);
+  };
+}
+
+
+
+
+ //for embedded image below:
+  handleEmbeddedImage(e) {
+    this.getBase64(e.target.files[0] , (base64) => {
+      this.setState({Base64Image:base64})
+    });
+  }
+
+
+  
   handleChangeCarPicture(e) {
     this.setState({Picture: e.target.value});
   }
@@ -107,6 +133,7 @@ class Change extends React.Component {
         className= 'form-control'
         value={this.state.Released}
          onChange={this.handleChangeCarReleased} />
+         
 
 
       <div className = 'form-group'>
@@ -119,13 +146,28 @@ class Change extends React.Component {
           value={this.state.Picture}
           onChange={this.handleChangeCarPicture}></textarea>
       </div>
+
+
+
         </div>
         <input type="submit" value="Submit" />
 
+       
         
+        <div>
+        <label>Real image</label>
 
-      </form>
-      </div>
+            <input
+             type="file" 
+            className= 'form-control'
+           
+            onChange={this.handleEmbeddedImage} />
+        </div>
+
+        </form>
+      <img src={this.state.Base64Image}></img> 
+       
+    </div>
     );
   }
 }
