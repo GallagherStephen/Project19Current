@@ -1,0 +1,51 @@
+
+================================================================================
+CAR CENTRAL
+================================================================================
+
+Created by Stephen Gallagher 
+	   G00314689
+
+//Commented as much as i thought needed explaining .
+//anything i didnt comment i felt was quite explanitory
+
+
+Car webpage linked with a mongoDb database for communication/link and storage.
+
+Sole purpose of my project is to be able to add,delete and edit along with
+being able to enjoy the content being added.
+
+================================================================================
+PAGES
+================================================================================
+Home Page - created using a carousel. can auto rotate between the images 
+	    displayed using src address's while also able to be 
+	    manually controlled.
+
+Add page -  where you can add  - 1)name of car 2)year 3)information 4)picture
+
+Contact page - Vital on websites to allow feedback and any
+ 		other issues from the public 
+
+Content page - displays the added content added from the add page.
+		This content which is saved on mongoDb as a schema.
+		(carSchema)
+
+about page - providing a purpose for the page and giving more of an insight
+
+
+added an image to the nav bar for a better display
+
+changed the style of the button on the add me page.
+
+attempted to use the embedded image.but had a slight issue so avoided it
+as it caused it to not run and didnt want to waste time on it over other areas
+================================================================================
+
+
+
+
+
+
+
+
