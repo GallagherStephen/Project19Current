@@ -43,6 +43,7 @@ const Schema = mongoose.Schema;
 const carSchema = new Schema({
     name:String,
     released:String,
+    information:String,
     picture:String
 })
 
@@ -131,23 +132,7 @@ app.get('/api/cars', (req, res) => {
 
 
 })
-   /*//(5)SENDS BACK A RESPONSE OF CAR JSON DATA 
-        const myCars = 
-        [
-        {
-        "Title":"Avengers: Infinity War",
-        "Year":"2018",
-        "Poster":"https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
-        },
-        {
-        "Title":"Captain America: Civil War",
-        "Year":"2016",
-        "Poster":"https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
-        }
-        ]
-
-        res.status(200).json({cars:myCars,message:'operation completed sucessfully!'})
-          */  
+    
         
 //---------------------------------------------------------------------------------------------------
 //(9) sending data up from the add.js page to the server.
@@ -159,6 +144,7 @@ app.post('/api/cars',(req,res) => {
     console.log(req.body);
     console.log(req.body.name);
     console.log(req.body.released);
+    console.log(req.body.information);
     console.log(req.body.picture);
 
 
@@ -166,6 +152,7 @@ app.post('/api/cars',(req,res) => {
 CarModel.create({
     name: req.body.name,
     released: req.body.released,
+    information: req.body.information,
     picture: req.body.picture,
 });
 })

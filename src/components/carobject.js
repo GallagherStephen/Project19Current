@@ -29,9 +29,7 @@ DeleteCar(e){
     render(){
         return(
             <div>
-                {/* <h4>{this.props.car.Name}</h4>
-                <p>{this.props.car.Released}</p>
-                <img src={this.props.car.Picture}></img> */}
+                {}
 
 
 
@@ -44,12 +42,20 @@ DeleteCar(e){
     <blockquote className="blockquote mb-0">
 
     <img align = "center" height = "300" width = "500" src={this.props.car.picture}></img>
+    
+     
       <footer>
-      {this.props.car.released}                     
+      
+      {this.props.car.name}  
+      <br></br>
+      {this.props.car.released} 
+      <br></br>    
+      {this.props.car.information}
+      
       </footer>
     </blockquote>
   </Card.Body>
-  <Button  class = "btn1" variant="danger" onClick={this.DeleteCar}> Delete  </Button>
+  <Button  class = "btn1" variant="outline-primary" onClick={this.DeleteCar}> Delete  </Button>
   <Link to={"/change/"+this.props.car._id} className="btn btn-primary">Change</Link> 
 
 </Card>

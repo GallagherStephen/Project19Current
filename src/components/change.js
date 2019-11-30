@@ -11,11 +11,13 @@ class Change extends React.Component {
     this.state = {Name: '',
                   Released: '',
                   Picture: '',
+                  Information: '',
                   _id:'',
                   Base64Image: ''}; //for embedded image
 
 
     this.handleChangeCarName = this.handleChangeCarName.bind(this);
+    this.handleChangeInformation = this.handleChangeInformation.bind(this);
     this.handleChangeCarReleased = this.handleChangeCarReleased.bind(this);
     this.handleChangeCarPicture = this.handleChangeCarPicture.bind(this);
     this.handleEmbeddedImage = this.handleEmbeddedImage.bind(this); //for embedded image
@@ -31,6 +33,10 @@ class Change extends React.Component {
 
   handleChangeCarReleased(e) {
     this.setState({Released: e.target.value});
+  }
+
+  handleChangeInformation(e){
+    this.setState({Information: e.target.value});
   }
 
 
@@ -63,12 +69,13 @@ class Change extends React.Component {
   //-------------------------------------------------
 
   handleSubmit(e) {
-    alert( 'Car:  ' + this.state.Name + "  "  + this.state.Released + "  " + this.state.Picture);
+    alert( 'Car:  ' + this.state.Name + "  "  + this.state.Released + "  "  + this.state.Information + "  " + this.state.Picture);
     e.preventDefault();
 
     const newCar = {
       name:this.state.Name,
       released:this.state.Released,
+      information:this.state.Information,
       picture:this.state.Picture
     }
 
@@ -79,6 +86,7 @@ class Change extends React.Component {
     //the following to make the inputs of edit blank after submit button Clicked
     this.setState({Name:'',
                    Released:'',
+                   Information:'',
                    Picture:'',
                   });
     
@@ -96,6 +104,7 @@ class Change extends React.Component {
           _id:Response.data._id,
           Name:Response.data.name,
           Released:Response.data.released,
+          Information:Response.data.information,
           Picture:Response.data.picture
       });
     })
@@ -113,13 +122,26 @@ class Change extends React.Component {
 
       <div className='form-group'>
       <label>
+
         Car Name:
         </label>
 
         <input type="text" 
-        className= 'form-control'
-        value={this.state.Name}
+         className= 'form-control'  
+         value={this.state.Name}  
          onChange={this.handleChangeCarName} />
+    </div>
+
+    <div className='form-group'>
+      <label>
+
+        Information:
+        </label>
+
+        <input type="text" 
+         className= 'form-control'  
+         value={this.state.Information}  
+         onChange={this.handleChangeInformation} />
     </div>
 
       

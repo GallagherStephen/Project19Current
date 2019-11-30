@@ -20,7 +20,7 @@ class ContentPage extends React.Component{
     
     render(){
         return(
-            <div>
+            <div style ={ { backgroundImage: "url('https://i.pinimg.com/originals/66/fe/3f/66fe3fb9d3f51c1a781d45a32ab39935.jpg')" } }>
                 <h1> Luxury sports Cars </h1>
                 <Cars myCars={this.state.cars}></Cars>
             </div>
